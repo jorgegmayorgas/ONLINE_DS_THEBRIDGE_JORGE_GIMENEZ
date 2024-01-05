@@ -3,6 +3,29 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 
+def figure(df_categorica):
+    
+    df = df_categorica.copy()
+    size=20
+    # Bar plot using Matplotlib
+    plt.figure(figsize=(30, 15))
+    plt.bar(df['Genre'], df['Count'])
+
+    # Annotate the bars with numeric values
+    for i, total in enumerate(df['Count']):
+        plt.text(i, total + 1, str(total), ha='center',fontsize=size)
+        # Setting font size for tick labels on x-axis and y-axis
+        plt.xticks(fontsize=size)  # Change the font size here
+        plt.yticks(fontsize=size)  # Change the font size here
+    plt.xlabel('Genres',fontsize=size)
+    plt.ylabel('Total',fontsize=size)
+    anyo = df['start_date'].min().year
+    anyo = str(anyo)
+    anyo_fin = df['end_date'].max().year
+    anyo_fin = str(anyo_fin)
+    plt.title('Comparison of Totals by Genre from '+ anyo + " to " + anyo_fin,fontsize=size)
+    plt.show()
+    
 def plot_combined_graphs(df, columns, whisker_width=1.5, bins = None):
     num_cols = len(columns)
     if num_cols:
